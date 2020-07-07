@@ -1,0 +1,13 @@
+
+        <<!--StackPanel>
+            <Viewbox>
+                <TextBlock>asd</TextBlock>
+            </Viewbox>
+            <Viewbox>
+                <TextBlock>asd</TextBlock>
+            </Viewbox>
+            <Label Name="lblKanji" MinHeight="60"  HorizontalAlignment="Stretch"  Content="{Binding Path=_kanji, Mode=OneWay}" />
+            <Label Name ="lblPronunciation"  MinHeight="30"  HorizontalAlignment="Stretch" Content="{Binding Path=_pronunciation, Mode=OneWay}" />
+            <Label Name ="lblChinese" MinHeight="30" HorizontalAlignment="Stretch" Content="{Binding Path=_chinese, Mode=OneWay}" />
+            <Label Name="lblExample" MinHeight="30" HorizontalAlignment="Stretch" Content="{Binding Path=_example, Mode=OneWay}" />
+        </StackPanel>-->

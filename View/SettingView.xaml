@@ -1,0 +1,189 @@
+﻿<Window x:Class="FlashCard.View.SettingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:s="clr-namespace:FlashCard.Properties"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlashCard.View"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Icon="/Asset/icon.ico"
+        Title="Setting" Height="315" Width="200">
+    <Border BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="1" x:Name="cbShowFC" Margin="0,0,0,0" 
+                        VerticalContentAlignment="Center"
+                        Content="Show FlashCard" IsThreeState="False"
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding Source={x:Static s:Settings.Default}, Path=IsShowFlashCard, Mode=TwoWay}"
+                        VerticalAlignment="Top"/>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="1" x:Name="cbStartWithWindow" Margin="0,0,0,0" 
+                        Content="Start with Windows" IsThreeState="False"
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding Source={x:Static s:Settings.Default}, Path=IsStartWithWindows, Mode=TwoWay}"
+                        VerticalAlignment="Top"/>
+            </Grid>
+            
+            <GroupBox VerticalAlignment="Top" VerticalContentAlignment="top" Grid.Row="6" MaxWidth="200">
+                <GroupBox.Header>
+                    <Label>Change word after (s)</Label>
+                </GroupBox.Header>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Slider Maximum="240" Minimum="1"
+                            HorizontalAlignment="Left"
+                            MinWidth="145"
+                            TickFrequency="10"
+                            TickPlacement="BottomRight"
+                            IsSnapToTickEnabled="True" 
+                            Name="kanjiTimeSlider"
+                            ValueChanged="KanjiTimeSlider_ValueChanged"
+                            Value="{Binding Source={x:Static s:Settings.Default}, Path=KanjiChangeTime, Mode=TwoWay}"/>
+
+                    <TextBox HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Center"
+                            TextAlignment="Center"
+                            MinWidth="20"
+                            MaxLength="3"
+                            Text="{Binding ElementName=kanjiTimeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                             />
+                </StackPanel>
+
+            </GroupBox>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="1" x:Name="cbShowKanjiOnly" Margin="0,0,0,0" 
+                        Content="Show main word only" IsThreeState="False"
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding Source={x:Static s:Settings.Default}, Path=IsShowKanjiOnlyOnCard, Mode=TwoWay}"
+                        VerticalAlignment="Top"/>
+            </Grid>
+
+            <GroupBox VerticalAlignment="Top"  Grid.Row="8" MaxWidth="200">
+                <GroupBox.Header>
+                    <Label>Main word's font</Label>
+                </GroupBox.Header>
+                <ComboBox Name="cmbFonts"
+                      SelectedValue="{Binding Source={x:Static s:Settings.Default}, Path=SelectedFont, Mode=TwoWay}"
+                      SelectedValuePath="FontName"
+                          SelectionChanged="CmbFonts_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock TextAlignment="Center" Text="{Binding FontName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </GroupBox>
+            <GroupBox VerticalAlignment="Top"  Grid.Row="10" MaxWidth="200">
+                <GroupBox.Header>
+                    <Label>Group of word</Label>
+                </GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Name="cmbGroup" Width="125"
+                      SelectedValue="{Binding Source={x:Static s:Settings.Default}, Path=SelectedGroup, Mode=TwoWay}"
+                      SelectedValuePath="GroupName"
+                          SelectionChanged="cmbGroup_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock TextAlignment="Center" Text="{Binding GroupName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
+                    <Button
+                        Margin="3,0,0,0"
+                        Width="auto"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        Name="btnGroupManage"
+                        FontSize="10"
+                        Click="btnGroupManage_Click"    
+                        Content="Manage">
+
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="2"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    
+                </StackPanel>
+            </GroupBox>
+
+            <Grid Grid.Row="15" Grid.RowSpan="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="2"
+                        x:Name="btnAddEdit"
+                        VerticalContentAlignment="Bottom"
+                        VerticalAlignment="Bottom"
+                        HorizontalContentAlignment="Center"
+                        Content="Add"
+                        FontSize="13" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Column="1"
+                        x:Name="btnShowAll"
+                        VerticalContentAlignment="Bottom"
+                        VerticalAlignment="Bottom"
+                        HorizontalContentAlignment="Center"
+                        Content="Show all"
+                        ToolTip="Show all word"
+                        FontSize="13" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MyKanjiModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=C:\Users\12191\Documents\kanjilist.db3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GROUP_KANJI">
+          <Key>
+            <PropertyRef Name="groupid" />
+          </Key>
+          <Property Name="groupid" Type="integer" Nullable="false" />
+          <Property Name="groupname" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MyKanji">
+          <Key>
+            <PropertyRef Name="_key" />
+          </Key>
+          <Property Name="_key" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="_index" Type="varchar" MaxLength="2147483647" />
+          <Property Name="_kanji" Type="varchar" MaxLength="100" />
+          <Property Name="_pronunciation" Type="varchar" MaxLength="100" />
+          <Property Name="_chinese" Type="varchar" MaxLength="100" />
+          <Property Name="_example" Type="varchar" MaxLength="1000" />
+          <Property Name="_didRemember" Type="int" />
+          <Property Name="_groupid" Type="integer" />
+        </EntityType>
+        <EntityContainer Name="MyKanjiModelStoreContainer">
+          <EntitySet Name="GROUP_KANJI" EntityType="Self.GROUP_KANJI" store:Type="Tables" />
+          <EntitySet Name="MyKanji" EntityType="Self.MyKanji" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyKanjiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MyKanji">
+          <Key>
+            <PropertyRef Name="C_key" />
+          </Key>
+          <Property Name="C_key" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_index" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="false" />
+          <Property Name="C_kanji" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="C_pronunciation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="C_chinese" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="C_example" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="C_didRemember" Type="Int32" />
+          <Property Name="C_groupid" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="mainEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MyKanjis" EntityType="Self.MyKanji" />
+          <EntitySet Name="GROUP_KANJI" EntityType="MyKanjiModel.GROUP_KANJI" />
+        </EntityContainer>
+        <EntityType Name="GROUP_KANJI">
+          <Key>
+            <PropertyRef Name="groupid" />
+          </Key>
+          <Property Name="groupid" Type="Int64" Nullable="false" />
+          <Property Name="groupname" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyKanjiModelStoreContainer" CdmEntityContainer="mainEntities">
+          <EntitySetMapping Name="MyKanjis">
+            <EntityTypeMapping TypeName="MyKanjiModel.MyKanji">
+              <MappingFragment StoreEntitySet="MyKanji">
+                <ScalarProperty Name="C_groupid" ColumnName="_groupid" />
+                <ScalarProperty Name="C_didRemember" ColumnName="_didRemember" />
+                <ScalarProperty Name="C_key" ColumnName="_key" />
+                <ScalarProperty Name="C_index" ColumnName="_index" />
+                <ScalarProperty Name="C_kanji" ColumnName="_kanji" />
+                <ScalarProperty Name="C_pronunciation" ColumnName="_pronunciation" />
+                <ScalarProperty Name="C_chinese" ColumnName="_chinese" />
+                <ScalarProperty Name="C_example" ColumnName="_example" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GROUP_KANJI">
+            <EntityTypeMapping TypeName="MyKanjiModel.GROUP_KANJI">
+              <MappingFragment StoreEntitySet="GROUP_KANJI">
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="groupid" ColumnName="groupid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
